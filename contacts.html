@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Контакты — Застава · правовая помощь военнослужащим</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Golos+Text:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+</head>
+<body data-screen-label="Контакты">
+
+<header class="navbar">
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="mark">З</span>
+        <span>
+          <span class="bn">Застава · правовая помощь</span><br />
+          <span class="bs">военный юрист</span>
+        </span>
+      </a>
+      <div class="navlinks">
+        <a href="index.html">Главная</a>
+        <a href="services.html">Услуги</a>
+        <a href="about.html">О юристе</a>
+        <a href="cases.html">Кейсы</a>
+        <a class="active" href="contacts.html">Контакты</a>
+        <a class="navphone" href="tel:+70000000000">+7 (___) ___-__-__</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="pagehead">
+      <span class="eyebrow">Контакты</span>
+      <h1>Напишите как есть, своими словами</h1>
+      <p class="plead">Не нужно юридических формулировок — просто расскажите, что случилось. Я отвечу лично в течение дня. Если ситуация острая — звоните в любое время.</p>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="contact-grid">
+      <div>
+        <div class="clist">
+          <div class="citem">
+            <div class="cl">Телефон</div>
+            <div class="cv"><a href="tel:+70000000000">+7 (___) ___-__-__</a></div>
+            <div class="cn">В острой ситуации — круглосуточно</div>
+          </div>
+          <div class="citem">
+            <div class="cl">Telegram</div>
+            <div class="cv"><a href="#">@_____</a></div>
+            <div class="cn">Самый быстрый способ связи</div>
+          </div>
+          <div class="citem">
+            <div class="cl">Почта</div>
+            <div class="cv"><a href="mailto:">_____@_____.ru</a></div>
+            <div class="cn">Для документов и подробных описаний</div>
+          </div>
+          <div class="citem" style="border-bottom: none;">
+            <div class="cl">География</div>
+            <div class="cv">Вся Россия</div>
+            <div class="cn">Онлайн и лично · выезды в гарнизоны</div>
+          </div>
+        </div>
+        <div class="confban">
+          <span class="dot"></span>
+          <p><b>Конфиденциальность — без исключений.</b> Всё, что вы расскажете, остаётся между нами. Имена, города и номера частей не разглашаются и не публикуются — никогда и никому.</p>
+        </div>
+      </div>
+
+      <form class="form" onsubmit="event.preventDefault();this.querySelector('button[type=submit]').textContent='Заявка отправлена ✓';">
+        <label for="f-name">Как к вам обращаться</label>
+        <input class="field" id="f-name" placeholder="Имя — можно не настоящее" />
+        <label for="f-contact">Телефон или Telegram</label>
+        <input class="field" id="f-contact" placeholder="+7 ___ или @ник" />
+        <label id="f-who-label">Кто вы</label>
+        <div class="cselect" data-cselect>
+          <button type="button" class="cselect-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="f-who-label">
+            <span class="cselect-value">Родственник военнослужащего</span>
+            <span class="cselect-caret" aria-hidden="true"></span>
+          </button>
+          <ul class="cselect-list" role="listbox" tabindex="-1" aria-labelledby="f-who-label">
+            <li class="cselect-opt is-selected" role="option" aria-selected="true" data-value="Родственник военнослужащего">Родственник военнослужащего</li>
+            <li class="cselect-opt" role="option" aria-selected="false" data-value="Военнослужащий">Военнослужащий</li>
+            <li class="cselect-opt" role="option" aria-selected="false" data-value="Другое">Другое</li>
+          </ul>
+          <input type="hidden" id="f-who" value="Родственник военнослужащего" />
+        </div>
+        <label for="f-msg">Коротко о ситуации</label>
+        <textarea class="field" id="f-msg" rows="5" placeholder="Что произошло? Чем могу помочь?"></textarea>
+        <button class="btn-primary" type="submit">Отправить заявку</button>
+        <p class="fnote">Нажимая кнопку, вы соглашаетесь на обработку данных. Первая консультация бесплатна и ни к чему не обязывает.</p>
+      </form>
+    </section>
+  </div>
+</main>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-cselect]').forEach(function(root){
+    var btn = root.querySelector('.cselect-btn');
+    var valueEl = root.querySelector('.cselect-value');
+    var list = root.querySelector('.cselect-list');
+    var hidden = root.querySelector('input[type=hidden]');
+    var opts = Array.prototype.slice.call(root.querySelectorAll('.cselect-opt'));
+
+    function open(){
+      root.classList.add('is-open');
+      btn.setAttribute('aria-expanded','true');
+      var sel = root.querySelector('.cselect-opt.is-selected') || opts[0];
+      if(sel) sel.focus();
+    }
+    function close(){
+      root.classList.remove('is-open');
+      btn.setAttribute('aria-expanded','false');
+    }
+    function choose(opt){
+      opts.forEach(function(o){ o.classList.remove('is-selected'); o.setAttribute('aria-selected','false'); });
+      opt.classList.add('is-selected');
+      opt.setAttribute('aria-selected','true');
+      valueEl.textContent = opt.dataset.value;
+      hidden.value = opt.dataset.value;
+      close();
+      btn.focus();
+    }
+
+    btn.addEventListener('click', function(){
+      root.classList.contains('is-open') ? close() : open();
+    });
+    opts.forEach(function(opt, i){
+      opt.setAttribute('tabindex','-1');
+      opt.addEventListener('click', function(){ choose(opt); });
+      opt.addEventListener('keydown', function(e){
+        if(e.key==='Enter' || e.key===' '){ e.preventDefault(); choose(opt); }
+        else if(e.key==='ArrowDown'){ e.preventDefault(); (opts[i+1]||opts[0]).focus(); }
+        else if(e.key==='ArrowUp'){ e.preventDefault(); (opts[i-1]||opts[opts.length-1]).focus(); }
+        else if(e.key==='Escape'){ e.preventDefault(); close(); btn.focus(); }
+      });
+    });
+    btn.addEventListener('keydown', function(e){
+      if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' '){ e.preventDefault(); open(); }
+    });
+    document.addEventListener('click', function(e){
+      if(!root.contains(e.target)) close();
+    });
+  });
+})();
+</script>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fin">
+      <span>© 2026 Застава · правовая помощь военнослужащим</span>
+      <span class="fnav">
+        <a href="services.html">Услуги</a>
+        <a href="about.html">О юристе</a>
+        <a href="cases.html">Кейсы</a>
+        <a href="contacts.html">Контакты</a>
+      </span>
+      <span>Работаю по всей России · онлайн и лично</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
